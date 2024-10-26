@@ -11,6 +11,14 @@ RUN npm prune --production
 # 第二阶段：仅复制构建产物和运行时依赖
 FROM node:20-alpine
 
+# 显式声明环境变量
+ENV UPTIME_KUMA_DB_NAME
+ENV UPTIME_KUMA_DB_HOSTNAME
+ENV UPTIME_KUMA_DB_USERNAME
+ENV UPTIME_KUMA_DB_TYPE
+ENV UPTIME_KUMA_DB_PORT
+ENV UPTIME_KUMA_DB_PASSWORD
+
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/server ./server
